@@ -23,7 +23,7 @@ fun ButtonEnter(navController: NavController) {
             .width(270.dp)
             .background(
                 brush = Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                    colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                     startX = 0f,
                     endX = 900f
                 ),

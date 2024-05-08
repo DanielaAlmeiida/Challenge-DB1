@@ -44,7 +44,8 @@ fun ExternalLoginButtons() {
     ) {
         SocialButton(
             icon = R.drawable.google_icon,
-            text = "Entrar com Google"
+            text = "Entrar com Google",
+
         )
 
         Spacer(modifier = Modifier.height(12.dp))

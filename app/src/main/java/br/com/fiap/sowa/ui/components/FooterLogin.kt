@@ -29,7 +29,7 @@ fun FooterLogin() {
             .height(50.dp)
             .background(
                 brush = Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                    colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                     startX = 0f,
                     endX = 900f
                 )
@@ -44,7 +44,7 @@ fun FooterLogin() {
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "Sowa Connect",
+            text = "MM&A",
             fontSize = 12.sp,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterVertically)
@@ -52,7 +52,7 @@ fun FooterLogin() {
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = "© Todos os direitos reservados 2023",
-            fontSize = 12.sp,
+            fontSize = 10.sp,
             color = Color.White,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.End

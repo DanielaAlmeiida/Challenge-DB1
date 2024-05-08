@@ -52,7 +52,7 @@ fun EmailAndPasswordFields(navController: NavController) {
             placeholder = "Digite seu email",
             modifier = Modifier,
             keyboardType = KeyboardType.Email,
-            atualizarValor = { email = it },
+            atualizarValor = { email = it }
         )
 
         OutlinedTextField(

@@ -1,5 +1,6 @@
 package br.com.fiap.sowa.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +23,8 @@ fun SocialButton(icon: Int, text: String) {
         onClick = { /* Lógica de login externo */ },
         colors = ButtonDefaults.buttonColors(Color.White),
         modifier = Modifier.width(270.dp),
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(10.dp),
+        border =  BorderStroke(1.dp, (Color(0xFF17AE8A)))
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Image(
@@ -31,7 +33,7 @@ fun SocialButton(icon: Int, text: String) {
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text(text = text, color = Color.DarkGray)
+            Text(text = text, color = (Color(0xFF17AE8A)))
         }
     }
 }

@@ -37,9 +37,9 @@ fun LoginAndCadastro (navController:NavController) {
 
     if (navController.currentBackStackEntry?.destination?.route == "login") {
         corLogin = Color.Transparent
-        corCadastro = Color(0xFF4876AD)
+        corCadastro = Color(0xFF098B6C)
     } else if (navController.currentBackStackEntry?.destination?.route == "cadastro") {
-        corLogin = Color(0xFF4876AD)
+        corLogin = Color(0xFF098B6C)
         corCadastro = Color.Transparent
     }
     Column (
@@ -55,7 +55,7 @@ fun LoginAndCadastro (navController:NavController) {
             .clip(shape = RoundedCornerShape(10.dp))
             .background(
                 brush = Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                    colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                 )
             )
             .padding(horizontal = 45.dp)
