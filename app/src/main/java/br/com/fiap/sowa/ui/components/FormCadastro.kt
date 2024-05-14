@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -129,14 +130,35 @@ fun FormCadastro(navController: NavController) {
             keyboardType = KeyboardType.Text,
             atualizarValor = { nome = it },
         )
-        OutlinedTextFieldModel(
-            value = areas,
-            label = if (profissionalDestaque) "Áreas de atuação" else "Áreas de interesse",
-            placeholder = if (profissionalDestaque) "Digite suas áreas de atuação" else "Digite suas áreas de interesse",
-            modifier = Modifier,
-            keyboardType = KeyboardType.Text,
-            atualizarValor = { areas = it }
+
+        Text(
+            text = "Área de Interesse:",
+            fontWeight = FontWeight.Bold
         )
+        // Uso do componente RadioButton
+        var areaSelecionada by remember { mutableStateOf<String?>(null) }
+        RadioButtonArea(
+            nome = "Matemática",
+            isSelected = areaSelecionada == "Matemática",
+            onSelected = {
+                areaSelecionada = "Matemática"
+            }
+        )
+        RadioButtonArea(
+            nome = "História",
+            isSelected = areaSelecionada == "História",
+            onSelected = {
+                areaSelecionada = "História"
+            }
+        )
+        RadioButtonArea(
+            nome = "Geografia",
+            isSelected = areaSelecionada == "Geografia",
+            onSelected = {
+                areaSelecionada = "Geografia"
+            }
+        )
+
         OutlinedTextField(
             value = cep,
             onValueChange = { cep = it },
