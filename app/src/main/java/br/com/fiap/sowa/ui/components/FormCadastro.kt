@@ -86,16 +86,16 @@ fun FormCadastro(navController: NavController) {
                         profissionalDestaque = false
                     },
                     shape = RoundedCornerShape(10.dp),
-                    colors = if (escolaDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.bluePrincipal)) else
+                    colors = if (escolaDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
-                    border = BorderStroke(1.dp, colorResource(id = R.color.bluePrincipal)),
+                    border = BorderStroke(1.dp, colorResource(id = R.color.greenPrincipal)),
                     modifier = Modifier
                         .width(100.dp)
                         .height(35.dp)
                 ) {
                     Text(
                         text = "Escola",
-                        color = if (escolaDestaque) Color.White else colorResource(id = R.color.bluePrincipal),
+                        color = if (escolaDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
                         fontSize = 12.sp,
                     )
                 }
@@ -105,9 +105,9 @@ fun FormCadastro(navController: NavController) {
                         escolaDestaque = false
                         profissionalDestaque = true
                     },
-                    colors = if (profissionalDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.bluePrincipal)) else
+                    colors = if (profissionalDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
-                    border = BorderStroke(1.dp, colorResource(id = R.color.bluePrincipal)),
+                    border = BorderStroke(1.dp, colorResource(id = R.color.greenPrincipal)),
                     shape = RoundedCornerShape(10.dp),
                     modifier = Modifier
                         .width(120.dp)
@@ -115,7 +115,7 @@ fun FormCadastro(navController: NavController) {
                 ) {
                     Text(
                         text = "Profissional",
-                        color = if (profissionalDestaque) Color.White else colorResource(id = R.color.bluePrincipal),
+                        color = if (profissionalDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
                         fontSize = 12.sp,
                     )
                 }
@@ -179,7 +179,7 @@ fun FormCadastro(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth(),
             shape = RoundedCornerShape(10.dp),
-            colors = if (cep.isNotBlank()) ButtonDefaults.buttonColors(colorResource(id = R.color.bluePrincipal))
+            colors = if (cep.isNotBlank()) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal))
             else ButtonDefaults.buttonColors(colorResource(id = R.color.white))
         ) {
             Text("Buscar Endereço")
@@ -269,7 +269,7 @@ fun FormCadastro(navController: NavController) {
                 .width(270.dp)
                 .background(
                     brush = Brush.horizontalGradient(
-                        colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                        colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                         startX = 0f,
                         endX = 900f
                     ),

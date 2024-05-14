@@ -1,6 +1,7 @@
 package br.com.fiap.sowa.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -51,10 +52,9 @@ fun CardPersonSearch(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)
         ) {
-            Icon(
+            Image(
                 painter = painterResource(id = R.drawable.person),
                 contentDescription = "Ícone de pessoa",
-                tint = colorResource(id = R.color.grayPrincipal),
                 modifier = Modifier.size(48.dp)
             )
 
@@ -64,11 +64,14 @@ fun CardPersonSearch(
                 Text(
                     text = nome,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.ExtraLight,
+                    color = Color.DarkGray
                 )
                 Text(
                     text = "Áreas: $areas",
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.DarkGray
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -80,7 +83,8 @@ fun CardPersonSearch(
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = estado,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = Color.Gray
                     )
                 }
             }
@@ -93,10 +97,9 @@ fun CardPersonSearch(
             ) {
                 // Avaliação
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_star_24),
+                    Image(
+                        painter = painterResource(id = R.drawable.star_avaliacao),
                         contentDescription = null,
-                        tint = Color.Yellow,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
@@ -111,7 +114,7 @@ fun CardPersonSearch(
 
                 Button(
                     onClick = { navController.navigate("perfil") },
-                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.bluePrincipal)),
+                    colors = ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
                         .align(Alignment.End)

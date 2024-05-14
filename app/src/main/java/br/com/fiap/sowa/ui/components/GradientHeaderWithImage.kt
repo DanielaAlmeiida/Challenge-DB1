@@ -14,9 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.fiap.sowa.R
 
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GradientHeaderWithImage() {
     Box(
@@ -33,15 +35,14 @@ fun GradientHeaderWithImage() {
     ) {
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.sowa_logo),
+                painter = painterResource(id = R.drawable.mma_icon_text),
                 contentDescription = "Imagem de cabeçalho",
                 modifier = Modifier
-                    .size(150.dp)
+                    .size(320.dp)
             )
         }
     }

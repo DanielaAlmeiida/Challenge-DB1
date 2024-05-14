@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitFactoryUser {
 
-    private val URL = "https://sowaconnect.free.beeceptor.com/"
+    private val URL = "http://191.239.120.22:3000/"
 
     private val retrofitFactoryUser = Retrofit
         .Builder()
@@ -16,5 +16,4 @@ class RetrofitFactoryUser {
     fun getUsuarioService(): UsuarioService {
         return retrofitFactoryUser.create(UsuarioService::class.java)
     }
-
 }

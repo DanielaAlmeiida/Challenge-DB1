@@ -3,12 +3,14 @@ package br.com.fiap.sowa.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Button
@@ -39,41 +41,45 @@ fun Header() {
             .shadow(4.dp)
             .background(
                 brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                    colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                     startX = 0f,
                     endX = 900f
                 )
             ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
-    ){
+    ) {
         Image(
-            painter = painterResource(id = R.drawable.sowa_logo),
-            contentDescription = "Logo Sowa",
+            painter = painterResource(id = R.drawable.mm_a_icon),
+            contentDescription = "Logo MM&A",
             modifier = Modifier
-                .size(60.dp)
+                .size(80.dp)
                 .padding(horizontal = 16.dp)
         )
         Text(
-            text = "SOWA Connect",
+            text = "MM&A",
             fontSize = 18.sp,
             fontWeight = FontWeight.Normal,
             color = Color.White
         )
         Button(
-            onClick = {  },
-            colors = ButtonDefaults.buttonColors(colorResource(id = R.color.notifications)),
+            onClick = { },
+            shape = RoundedCornerShape(20.dp),
+            colors = ButtonDefaults.buttonColors((Color.Transparent)),
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(horizontal = 5.dp)
-                .width(90.dp)
+                .width(87.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.Notifications,
                 contentDescription = "Ícone notificações"
             )
-            Text(text = "9+", fontSize = 12.sp, color = Color.White)
+            Text(
+                text = "9+",
+                fontSize = 12.sp,
+                color = Color.White,
+            )
         }
     }
 }
-

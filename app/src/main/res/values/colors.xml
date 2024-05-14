@@ -15,4 +15,6 @@
     <color name="darkBlue">#FF1A4980</color>
     <color name="superLightBlue">#FFEDF1F5</color>
     <color name="notifications">#FFEC392D</color>
+    <color name="greenPrincipal">#FF5ABBA4</color>
+    <color name="darkGreen">#FF244B42</color>
 </resources>

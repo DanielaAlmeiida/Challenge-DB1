@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.sowa.ui.screens.CadastroScreen
+import br.com.fiap.sowa.ui.screens.ConnectionsScreen
 //import br.com.fiap.sowa.ui.screens.ConnectionsScreen
 import br.com.fiap.sowa.ui.screens.HomeScreen
 import br.com.fiap.sowa.ui.screens.LoginScreen
@@ -23,9 +24,9 @@ fun SetupNavigation() {
         composable(route = "home") {
             HomeScreen(navController)
         }
-//        composable(route = "connections") {
-//            ConnectionsScreen(navController)
-//        }
+        composable(route = "connections") {
+            ConnectionsScreen(navController)
+        }
         composable(route = "perfil") {
             PerfilScreen(navController)
         }

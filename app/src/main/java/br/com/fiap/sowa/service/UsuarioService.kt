@@ -6,8 +6,8 @@ import retrofit2.http.GET
 
 interface UsuarioService {
 
-    @GET("profissionais/")
-    fun getUsuariosProffisionais(): Call<List<Usuario>>
+    @GET("usuarios/")
+    fun getUsuarios(): Call<List<Usuario>>
 
     @GET("escolas/")
     fun getUsuariosEscolas(): Call<List<Usuario>>

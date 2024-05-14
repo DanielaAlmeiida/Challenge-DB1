@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 fun CoroutineScope.searchUsers(onResult: (List<Usuario>?) -> Unit) {
-    val call = RetrofitFactoryUser().getUsuarioService().getUsuariosProffisionais()
+    val call = RetrofitFactoryUser().getUsuarioService().getUsuarios()
     call.enqueue(object : Callback<List<Usuario>> {
 
         override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {

@@ -1,5 +1,6 @@
 package br.com.fiap.sowa.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.material3.Button
@@ -13,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -24,13 +26,13 @@ fun NavBar(navController: NavController, perfilButton: String) {
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
-            .background(colorResource(id = R.color.bluePrincipal)),
+            .background(colorResource(id = R.color.greenPrincipal)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Button(
             onClick = { navController.navigate("home") },
-            colors = ButtonDefaults.buttonColors(if (perfilButton == "home") colorResource(id = R.color.darkBlue) else colorResource(id = R.color.bluePrincipal)),
+            colors = ButtonDefaults.buttonColors(if (perfilButton == "home") colorResource(id = R.color.darkGreen) else colorResource(id = R.color.greenPrincipal)),
             shape = RectangleShape,
             modifier = Modifier
                 .fillMaxHeight()
@@ -51,8 +53,8 @@ fun NavBar(navController: NavController, perfilButton: String) {
             }
         }
         Button(
-            onClick = { },
-            colors = ButtonDefaults.buttonColors(if (perfilButton == "connections") colorResource(id = R.color.darkBlue) else colorResource(id = R.color.bluePrincipal)),
+            onClick = { navController.navigate("connections") },
+            colors = ButtonDefaults.buttonColors(if (perfilButton == "connections") colorResource(id = R.color.darkGreen) else colorResource(id = R.color.greenPrincipal)),
             shape = RectangleShape,
             modifier = Modifier
                 .fillMaxHeight()
@@ -62,20 +64,19 @@ fun NavBar(navController: NavController, perfilButton: String) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.weight(1f)
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.connection),
+                Image(
+                    painter = painterResource(id = R.drawable.mm_a_icon),
                     contentDescription = null,
-                    tint = Color.White,
                     modifier = Modifier.size(30.dp)
                 )
                 Spacer(modifier = Modifier.height(3.dp))
-                Text(text = "Connections", fontSize = 12.sp, color = Color.White)
+                Text(text = "Matches", fontSize = 12.sp, color = Color.White)
             }
         }
 
         Button(
             onClick = { navController.navigate("perfil") },
-            colors = ButtonDefaults.buttonColors(if (perfilButton == "perfil") colorResource(id = R.color.darkBlue) else colorResource(id = R.color.bluePrincipal)),
+            colors = ButtonDefaults.buttonColors(if (perfilButton == "perfil") colorResource(id = R.color.darkGreen) else colorResource(id = R.color.greenPrincipal)),
             shape = RectangleShape,
             modifier = Modifier
                 .fillMaxHeight()
@@ -97,5 +98,3 @@ fun NavBar(navController: NavController, perfilButton: String) {
         }
     }
 }
-
-

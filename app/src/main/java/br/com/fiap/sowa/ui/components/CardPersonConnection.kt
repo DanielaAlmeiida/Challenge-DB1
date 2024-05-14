@@ -1,6 +1,7 @@
 package br.com.fiap.sowa.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,7 +32,8 @@ fun CardPersonConnection(
     areas: String,
     estado: String,
     email: String,
-    telefone: String
+    telefone: String,
+    avaliacao: String
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -44,10 +46,9 @@ fun CardPersonConnection(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)
         ) {
-            Icon(
+            Image(
                 painter = painterResource(id = R.drawable.person),
                 contentDescription = "Ícone de pessoa",
-                tint = colorResource(id = R.color.grayPrincipal),
                 modifier = Modifier.size(48.dp)
             )
 
@@ -57,11 +58,14 @@ fun CardPersonConnection(
                 Text(
                     text = nome,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.ExtraLight,
+                    color = Color.DarkGray
                 )
                 Text(
                     text = "Áreas: $areas",
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.DarkGray
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -73,7 +77,8 @@ fun CardPersonConnection(
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = estado,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = Color.Gray
                     )
                 }
             }
@@ -86,15 +91,29 @@ fun CardPersonConnection(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
+                        text = avaliacao,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.star_avaliacao),
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
                         text = telefone,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.phone),
                         contentDescription = null,
-                        tint = Color.Black,
+                        tint = Color.DarkGray,
                         modifier = Modifier.size(16.dp)
                     )
                 }
@@ -102,13 +121,14 @@ fun CardPersonConnection(
                     Text(
                         text = email,
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Gray
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Icon(
                         painter = painterResource(id = R.drawable.email),
                         contentDescription = null,
-                        tint = Color.Black,
+                        tint = Color.DarkGray,
                         modifier = Modifier.size(16.dp)
                     )
                 }

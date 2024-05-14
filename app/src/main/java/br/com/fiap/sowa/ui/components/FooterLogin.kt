@@ -38,7 +38,7 @@ fun FooterLogin() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.sowa_logo),
+            painter = painterResource(id = R.drawable.mm_a_icon),
             contentDescription = "Logo Sowa",
             modifier = Modifier.size(40.dp)
         )
