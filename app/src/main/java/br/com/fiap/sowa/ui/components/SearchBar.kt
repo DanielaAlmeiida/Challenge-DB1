@@ -7,14 +7,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.fiap.sowa.R
 
@@ -22,6 +29,8 @@ import br.com.fiap.sowa.R
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SearchBar() {
+    var searchText by remember { mutableStateOf("") }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,9 +48,12 @@ fun SearchBar() {
             ),
             modifier = Modifier
                 .padding(20.dp, 0.dp),
-            value = "",
-            onValueChange = {
-            },
+            value = searchText,
+            onValueChange = { searchText = it },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Done
+            ),
             label = {
                 Text(text = "Pesquisar")
             },
