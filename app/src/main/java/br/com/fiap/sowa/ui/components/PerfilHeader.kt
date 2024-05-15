@@ -1,11 +1,13 @@
 package br.com.fiap.sowa.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,9 +42,10 @@ fun PreviewPerfilHeader() {
         PerfilHeader("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
     }
 }
+
 @Composable
 fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections: String) {
-    Column (
+    Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -56,88 +59,94 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
                     endX = 900f
                 )
             )
-    ){
-        Row (
+    ) {
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
-        ){
-            Column (
+        ) {
+            Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
                     .height(280.dp)
-            ){
-                Button(
-                    onClick = { /*TODO*/ },
-                    shape = RoundedCornerShape(50.dp),
-                    colors = ButtonDefaults.buttonColors(Color.White),
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.person),
+                    contentDescription = "Ícone de pessoa",
                     modifier = Modifier
-                        .height(70.dp)
-                        .width(70.dp)
-                        .padding(0.dp, 0.dp, 5.dp, 0.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.person),
-                        contentDescription = "Ícone de pessoa",
-                        tint = Color.Black,
-                        modifier = Modifier.size(90.dp)
-                    )
-                }
-
+                        .size(100.dp)
+                        .padding(5.dp)
+                )
             }
-            Column (
+            Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier
                     .height(180.dp)
-            ){
+            ) {
                 Text(
                     text = nome,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold ,
+                    fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
-                Text(
-                    text = "Mentor em: ",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Light,
-                    color = Color.White
-                )
-                Text(
-                    text = areas,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Light,
-                    color = Color.White
-                )
+                Row(
+                    modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)
+                ) {
+                    Text(
+                        text = "Mentor em: ",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Light,
+                        color = Color.White
+                    )
+                    Text(
+                        text = areas,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Light,
+                        color = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Row {
                     AreaInteresse(nomeAreaInteresse = "TEATRO", corAreaInteresse = Color.Red)
                     AreaInteresse(nomeAreaInteresse = "DANCA", corAreaInteresse = Color.Blue)
                     AreaInteresse(nomeAreaInteresse = "ROBOTICA", corAreaInteresse = Color.Gray)
                     AreaInteresse(nomeAreaInteresse = "CIENCIA", corAreaInteresse = Color.Cyan)
                 }
-                Text(
-                    text = "São Paulo - SP",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Light,
-                    color = Color.White
-                )
+                Row(
+                    modifier = Modifier.padding(top = 8.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_location_on_24),
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = "São Paulo - SP",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Light,
+                        color = Color.White,
+                    )
+                }
+
             }
         }
 
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
+        Row(
+            modifier = Modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             PerfilHeaderDados(
                 descricao = "Ícone de avaliação",
                 iconId = R.drawable.baseline_star_24,
-                color = Color.Yellow,
+                color = Color.White,
                 texto = avaliacao
             )
             PerfilHeaderDados(
@@ -148,7 +157,7 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
             )
             PerfilHeaderDados(
                 descricao = "Ícone de configurações",
-                iconId = R.drawable.baseline_settings_24,
+                iconId = R.drawable.settings,
                 color = Color.White,
                 texto = "Editar perfil"
             )

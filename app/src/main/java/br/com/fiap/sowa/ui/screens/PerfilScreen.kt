@@ -23,7 +23,7 @@ fun PerfilScreen( navController: NavController ) {
         modifier = Modifier.fillMaxSize()
     ) {
         Header()
-        PerfilHeader("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
+        PerfilHeader("José Barreto", "Teatro, Dança", "4/5", "222")
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {

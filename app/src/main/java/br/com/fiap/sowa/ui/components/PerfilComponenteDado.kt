@@ -20,8 +20,8 @@ fun PerfilComponenteDado(
     Row {
         Text(
             text = text,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Medium,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.SemiBold,
             color = Color.Black
         )
         Spacer(modifier = Modifier.width(6.dp))

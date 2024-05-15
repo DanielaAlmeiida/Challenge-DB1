@@ -39,12 +39,13 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
         ){
             Text(
                 text = "Informações acadêmicas",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.DarkGray
             )
-            PerfilComponenteDado(text = "-", dado = endereco)
-            PerfilComponenteDado(text = "-", dado = endereco)
+            Spacer(modifier = Modifier.height(6.dp))
+            PerfilComponenteDado(text = "•", dado = endereco)
+            PerfilComponenteDado(text = "•", dado = endereco)
             Spacer(modifier = Modifier.height(16.dp))
         }
 
@@ -54,9 +55,9 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
             item {
                 Text(
                     text = "Experiência",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.DarkGray,
                 )
                 Surface(
                     modifier = Modifier
@@ -87,11 +88,11 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "Contato",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.DarkGray,
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
             PerfilComponenteDado(text = "Telefone: ", dado = telefone)
             PerfilComponenteDado(text = "Email: ", dado = email)
             PerfilComponenteDado(text = "Endereço: ", dado = endereco)
