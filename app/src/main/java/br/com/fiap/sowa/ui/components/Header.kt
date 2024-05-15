@@ -56,11 +56,11 @@ fun Header() {
                 .size(80.dp)
                 .padding(horizontal = 16.dp)
         )
-        Text(
-            text = "MM&A",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Normal,
-            color = Color.White
+        Image(
+            painter = painterResource(id = R.drawable.mma_text),
+            contentDescription = "MM&A",
+            modifier = Modifier
+                .size(80.dp)
         )
         Button(
             onClick = { },

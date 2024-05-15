@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -43,7 +44,7 @@ fun OutlinedTextFieldModel(
         placeholder = { Text(text = placeholder) },
         modifier = modifier.fillMaxWidth(),
         maxLines = 1,
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = ImeAction.Done),
         onValueChange = atualizarValor,
         shape = RoundedCornerShape(10.dp),
         trailingIcon = trailingIcon
