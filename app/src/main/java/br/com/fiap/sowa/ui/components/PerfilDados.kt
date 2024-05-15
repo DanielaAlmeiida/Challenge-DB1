@@ -1,7 +1,8 @@
 package br.com.fiap.sowa.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,15 +31,33 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
             .height(400.dp)
             .padding(20.dp)
     ) {
-
-        PerfilComponenteDado(text = "Telefone: ", dado = telefone)
-        PerfilComponenteDado(text = "Email: ", dado = email)
-        PerfilComponenteDado(text = "Endereço: ", dado = endereco)
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Text(
+                text = "Informações acadêmicas",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+            PerfilComponenteDado(text = "-", dado = endereco)
+            PerfilComponenteDado(text = "-", dado = endereco)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
 
         LazyColumn (
             modifier = Modifier.weight(1f)
         ) {
             item {
+                Text(
+                    text = "Experiência",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                )
                 Surface(
                     modifier = Modifier
                         .fillMaxSize()
@@ -46,29 +65,37 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
                     shape = RoundedCornerShape(12.dp),
                     color = colorResource(id = R.color.lightGray2)
                 )  {
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = descricao,
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Light,
-                        color = Color.Black,
-                        modifier = Modifier .padding(14.dp)
-                    )
+                            text = descricao,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Light,
+                            color = Color.Black,
+                            modifier = Modifier .padding(14.dp)
+                        )
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
-        Column {
+
+        Column (
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Áreas de interesse:",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Medium,
+                text = "Contato",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
                 color = Color.Black,
             )
-            Row {
-                AreaInteresse(nomeAreaInteresse = "TEATRO", corAreaInteresse = Color.Red)
-                AreaInteresse(nomeAreaInteresse = "DANCA", corAreaInteresse = Color.Blue)
-                AreaInteresse(nomeAreaInteresse = "ROBOTICA", corAreaInteresse = Color.Gray)
-                AreaInteresse(nomeAreaInteresse = "CIENCIA", corAreaInteresse = Color.Cyan)
-            }
+            Spacer(modifier = Modifier.height(4.dp))
+            PerfilComponenteDado(text = "Telefone: ", dado = telefone)
+            PerfilComponenteDado(text = "Email: ", dado = email)
+            PerfilComponenteDado(text = "Endereço: ", dado = endereco)
         }
+
     }
 }

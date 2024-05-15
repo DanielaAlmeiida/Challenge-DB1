@@ -2,11 +2,14 @@ package br.com.fiap.sowa.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,10 +25,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.sowa.R
 
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewPerfilHeader() {
+    val navController = rememberNavController()
+    Box(modifier = Modifier.fillMaxSize()) {
+        PerfilHeader("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
+    }
+}
 @Composable
 fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections: String) {
     Column (
@@ -33,56 +47,90 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .height(230.dp)
+            .height(180.dp)
             .shadow(6.dp)
             .background(
                 brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
-                    colors = listOf(Color(0xFF3A7CCB), Color(0xFF1A4980)),
+                    colors = listOf(Color(0xFF6AD9BE), Color(0xFF17AE8A)),
                     startX = 0f,
                     endX = 900f
                 )
             )
     ){
-        Column (
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .height(180.dp)
-        ){
-            Button(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(50.dp),
-                colors = ButtonDefaults.buttonColors(Color.White),
-                modifier = Modifier
-                    .height(100.dp)
-                    .width(100.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.person),
-                    contentDescription = "Ícone de pessoa",
-                    tint = Color.Black,
-                    modifier = Modifier.size(90.dp)
-                )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = nome,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold ,
-                color = Color.White
-            )
-            Text(
-                text = areas,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Light,
-                color = Color.White
-            )
-        }
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
-                .background(colorResource(id = R.color.darkBlue)),
+                .height(140.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .height(280.dp)
+            ){
+                Button(
+                    onClick = { /*TODO*/ },
+                    shape = RoundedCornerShape(50.dp),
+                    colors = ButtonDefaults.buttonColors(Color.White),
+                    modifier = Modifier
+                        .height(70.dp)
+                        .width(70.dp)
+                        .padding(0.dp, 0.dp, 5.dp, 0.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.person),
+                        contentDescription = "Ícone de pessoa",
+                        tint = Color.Black,
+                        modifier = Modifier.size(90.dp)
+                    )
+                }
+
+            }
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .height(180.dp)
+            ){
+                Text(
+                    text = nome,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold ,
+                    color = Color.White
+                )
+                Text(
+                    text = "Mentor em: ",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Light,
+                    color = Color.White
+                )
+                Text(
+                    text = areas,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Light,
+                    color = Color.White
+                )
+                Row {
+                    AreaInteresse(nomeAreaInteresse = "TEATRO", corAreaInteresse = Color.Red)
+                    AreaInteresse(nomeAreaInteresse = "DANCA", corAreaInteresse = Color.Blue)
+                    AreaInteresse(nomeAreaInteresse = "ROBOTICA", corAreaInteresse = Color.Gray)
+                    AreaInteresse(nomeAreaInteresse = "CIENCIA", corAreaInteresse = Color.Cyan)
+                }
+                Text(
+                    text = "São Paulo - SP",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Light,
+                    color = Color.White
+                )
+            }
+        }
+
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ){
