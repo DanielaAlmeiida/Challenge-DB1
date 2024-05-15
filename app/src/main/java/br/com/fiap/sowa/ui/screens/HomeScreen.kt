@@ -15,12 +15,12 @@ import br.com.fiap.sowa.model.Usuario
 import br.com.fiap.sowa.ui.components.Header
 import br.com.fiap.sowa.ui.components.NavBar
 import br.com.fiap.sowa.ui.components.CardPersonSearch
+import br.com.fiap.sowa.ui.components.HomeMatchPerfil
 import br.com.fiap.sowa.ui.components.SearchBar
 import br.com.fiap.sowa.ui.components.searchUsers
 
 @Composable
 fun HomeScreen(navController: NavController) {
-
     var usuarios by remember { mutableStateOf(emptyList<Usuario>()) }
 
     LaunchedEffect(Unit) {
@@ -39,6 +39,8 @@ fun HomeScreen(navController: NavController) {
     ) {
         Header()
         SearchBar()
+        HomeMatchPerfil("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
+        /* PESQUISA AVANÇADA */
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
@@ -49,6 +51,7 @@ fun HomeScreen(navController: NavController) {
         NavBar(navController, "home")
     }
 }
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
