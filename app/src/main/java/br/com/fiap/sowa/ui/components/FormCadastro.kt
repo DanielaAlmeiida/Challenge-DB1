@@ -19,7 +19,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,9 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,8 +46,8 @@ import retrofit2.Response
 
 @Composable
 fun FormCadastro(navController: NavController) {
-    var escolaDestaque by remember { mutableStateOf(true) }
-    var profissionalDestaque by remember { mutableStateOf(false) }
+    var aprendizDestaque by remember { mutableStateOf(true) }
+    var mentorDestaque by remember { mutableStateOf(false) }
     var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
     var cep by remember { mutableStateOf("") }
@@ -83,11 +80,11 @@ fun FormCadastro(navController: NavController) {
             ) {
                 Button(
                     onClick = {
-                        escolaDestaque = true
-                        profissionalDestaque = false
+                        aprendizDestaque = true
+                        mentorDestaque = false
                     },
                     shape = RoundedCornerShape(10.dp),
-                    colors = if (escolaDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
+                    colors = if (aprendizDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
                     border = BorderStroke(1.dp, colorResource(id = R.color.greenPrincipal)),
                     modifier = Modifier
@@ -95,18 +92,18 @@ fun FormCadastro(navController: NavController) {
                         .height(35.dp)
                 ) {
                     Text(
-                        text = "Escola",
-                        color = if (escolaDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
+                        text = "Aprendiz",
+                        color = if (aprendizDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
                         fontSize = 12.sp,
                     )
                 }
 
                 Button(
                     onClick = {
-                        escolaDestaque = false
-                        profissionalDestaque = true
+                        aprendizDestaque = false
+                        mentorDestaque = true
                     },
-                    colors = if (profissionalDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
+                    colors = if (mentorDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
                     border = BorderStroke(1.dp, colorResource(id = R.color.greenPrincipal)),
                     shape = RoundedCornerShape(10.dp),
@@ -115,8 +112,8 @@ fun FormCadastro(navController: NavController) {
                         .height(35.dp)
                 ) {
                     Text(
-                        text = "Profissional",
-                        color = if (profissionalDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
+                        text = "Mentor",
+                        color = if (mentorDestaque) Color.White else colorResource(id = R.color.greenPrincipal),
                         fontSize = 12.sp,
                     )
                 }
@@ -125,39 +122,14 @@ fun FormCadastro(navController: NavController) {
         OutlinedTextFieldModel(
             value = nome,
             label = "Nome",
-            placeholder = if (profissionalDestaque) "Digite o nome do profissional" else "Digite o nome da escola",
+            placeholder = "Digite seu nome",
             modifier = Modifier,
             keyboardType = KeyboardType.Text,
             atualizarValor = { nome = it },
         )
 
-        Text(
-            text = "Área de Interesse:",
-            fontWeight = FontWeight.Bold
-        )
-        // Uso do componente RadioButton
-        var areaSelecionada by remember { mutableStateOf<String?>(null) }
-        RadioButtonArea(
-            nome = "Matemática",
-            isSelected = areaSelecionada == "Matemática",
-            onSelected = {
-                areaSelecionada = "Matemática"
-            }
-        )
-        RadioButtonArea(
-            nome = "História",
-            isSelected = areaSelecionada == "História",
-            onSelected = {
-                areaSelecionada = "História"
-            }
-        )
-        RadioButtonArea(
-            nome = "Geografia",
-            isSelected = areaSelecionada == "Geografia",
-            onSelected = {
-                areaSelecionada = "Geografia"
-            }
-        )
+        // Uso do Dropdown
+        DropdownMenuModel()
 
         OutlinedTextField(
             value = cep,
