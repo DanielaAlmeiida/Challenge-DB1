@@ -1,5 +1,7 @@
 package br.com.fiap.sowa.ui.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,6 +21,7 @@ import br.com.fiap.sowa.ui.components.HomeMatchPerfil
 import br.com.fiap.sowa.ui.components.SearchBar
 import br.com.fiap.sowa.ui.components.searchUsers
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun HomeScreen(navController: NavController) {
     var usuarios by remember { mutableStateOf(emptyList<Usuario>()) }
@@ -53,6 +56,7 @@ fun HomeScreen(navController: NavController) {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewHomeScreen() {

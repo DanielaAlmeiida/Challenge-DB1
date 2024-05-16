@@ -1,5 +1,8 @@
 package br.com.fiap.sowa.ui.components
 
+import android.Manifest
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -7,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,11 +24,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,11 +40,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.sowa.R
-import br.com.fiap.sowa.ui.screens.HomeScreen
+import br.com.fiap.sowa.model.NotificationHandler
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnections: String) {
-        Column (
+    val context = LocalContext.current
+    val postNotificationPermission = rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+    val notificationHandler = remember { NotificationHandler(context) }
+
+    LaunchedEffect(key1 = true) {
+        if (!postNotificationPermission.status.isGranted) {
+            postNotificationPermission.launchPermissionRequest()
+        }
+    }
+
+    Column (
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -186,7 +206,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.circle_close),
-                        contentDescription = "Ícone de pessoa",
+                        contentDescription = "Ícone de negação",
                         tint = Color.Red,
                         modifier = Modifier.size(100.dp)
                     )
@@ -201,7 +221,9 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 )
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        notificationHandler.showExpandedNotificationWithBigText()
+                    },
                     shape = RoundedCornerShape(50.dp),
                     colors = ButtonDefaults.buttonColors(Color.White),
                     modifier = Modifier
@@ -209,7 +231,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.circle_check),
-                        contentDescription = "Ícone de pessoa",
+                        contentDescription = "Ícone de afirmação",
                         tint = Color(0xFF17AE8A),
                         modifier = Modifier.size(100.dp)
                     )
@@ -219,6 +241,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
     }
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewHomeMatchPerfil() {
