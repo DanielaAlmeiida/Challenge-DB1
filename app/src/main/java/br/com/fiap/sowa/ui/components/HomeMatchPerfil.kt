@@ -3,6 +3,7 @@ package br.com.fiap.sowa.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,9 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.sowa.R
+import br.com.fiap.sowa.ui.screens.HomeScreen
 
 @Composable
 fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnections: String) {
@@ -39,7 +44,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .wrapContentHeight()
                 .shadow(6.dp)
                 .background(
                     brush = Brush.horizontalGradient(
@@ -136,7 +141,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 PerfilComponenteDado(text = "-", dado = "dado")
                 PerfilComponenteDado(text = "-", dado = "dado")
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
                     text = "Experiência",
@@ -146,14 +151,14 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 )
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(0.dp, 12.dp, 0.dp, 12.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = colorResource(id = R.color.lightGray2)
                 ) {
                     Text(
-                        text = "dado descricao",
-                        fontSize = 13.sp,
+                        text = "dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao",
+                        fontSize = 523.sp,
                         fontWeight = FontWeight.Light,
                         color = Color.Black,
                         modifier = Modifier .padding(14.dp)
@@ -167,7 +172,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight()
+                    .height(70.dp)
                     .background(color = Color.White)
                     .border(width = 1.dp, color = Color.Gray)
 
@@ -212,3 +217,13 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
             }
         }
     }
+
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewHomeMatchPerfil() {
+    val navController = rememberNavController()
+    Box(modifier = Modifier.fillMaxSize()) {
+        HomeMatchPerfil("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
+    }
+}
