@@ -158,7 +158,7 @@ fun HomeMatchPerfil(nome: String, areas: String, avaliacao: String, numbConnecti
                 ) {
                     Text(
                         text = "dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao dado descricao",
-                        fontSize = 523.sp,
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.Light,
                         color = Color.Black,
                         modifier = Modifier .padding(14.dp)
