@@ -48,7 +48,7 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier.weight(1f)
         ) {
             items(usuarios) { usuario ->
-                CardPersonSearch(navController, nome = usuario.nome ?: "", areas = usuario.areas ?: "", estado = usuario.endereco?.uf ?: "", avaliacao = "4.5")
+                CardPersonSearch(navController, nome = usuario.nome ?: "", areas = usuario.areas ?: "", /*estado = usuario.endereco?.uf*/ "SP"  ?: "", avaliacao = "4.5")
             }
         }
         NavBar(navController, "home")

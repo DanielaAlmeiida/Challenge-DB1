@@ -20,6 +20,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.sowa.R
 import br.com.fiap.sowa.model.Endereco
+import br.com.fiap.sowa.model.UserEndereco
+import br.com.fiap.sowa.model.Usuario
 import br.com.fiap.sowa.service.RetrofitFactory
+import br.com.fiap.sowa.service.UsuarioService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,15 +55,28 @@ fun FormCadastro(navController: NavController) {
     var mentorDestaque by remember { mutableStateOf(false) }
     var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
+    var tipo by remember { mutableStateOf("") }
     var experiencias by remember { mutableStateOf("") }
     var academicas by remember { mutableStateOf("") }
+    var telefone by remember { mutableStateOf("") }
     var cep by remember { mutableStateOf("") }
-    var areas by remember { mutableStateOf("") }
+    var areaSelecionada by remember { mutableStateOf<String?>(null) }
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
     var csenha by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
     var isConfirmedPasswordVisible by remember { mutableStateOf(false) }
+    var usuario by remember { mutableStateOf(
+        Usuario("", "", "", "", "", "", "", "", "")) }
+    var enderecos by remember { mutableStateOf(emptyList<UserEndereco>()) }
+
+    LaunchedEffect(Unit) {
+        searchEnderecos { enderecoObtido ->
+            enderecoObtido?.let {
+                enderecos = it
+            }
+        }
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,6 +102,7 @@ fun FormCadastro(navController: NavController) {
                     onClick = {
                         aprendizDestaque = true
                         mentorDestaque = false
+                        tipo = "aprendiz"
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = if (aprendizDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
@@ -105,6 +123,7 @@ fun FormCadastro(navController: NavController) {
                     onClick = {
                         aprendizDestaque = false
                         mentorDestaque = true
+                        tipo = "mentor"
                     },
                     colors = if (mentorDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),
@@ -147,22 +166,25 @@ fun FormCadastro(navController: NavController) {
             keyboardType = KeyboardType.Text,
             atualizarValor = { academicas = it },
         )
+        OutlinedTextFieldModel(
+            value = telefone,
+            label = "Telefone",
+            placeholder = "Digite seu telefone",
+            modifier = Modifier,
+            keyboardType = KeyboardType.Text,
+            atualizarValor = { telefone = it },
+        )
 
         // Uso do Dropdown
         //DropdownMenuModel()
 
         // Uso do componente RadioButton
-        var areaSelecionada by remember { mutableStateOf<String?>(null) }
-
         Text(
             text = "Área de Interesse:",
             fontWeight = FontWeight.Bold
         )
         Row {
             Column{
-                // Uso do componente RadioButton
-                var areaSelecionada by remember { mutableStateOf<String?>(null) }
-
                 RadioButtonArea(
                     nome = "Matemática",
                     isSelected = areaSelecionada == "Matemática",
@@ -186,28 +208,25 @@ fun FormCadastro(navController: NavController) {
                 )
             }
             Column {
-                // Uso do componente RadioButton
-                var areaSelecionada by remember { mutableStateOf<String?>(null) }
-
                 RadioButtonArea(
-                    nome = "Matemática",
-                    isSelected = areaSelecionada == "Matemática",
+                    nome = "Química",
+                    isSelected = areaSelecionada == "Química",
                     onSelected = {
-                        areaSelecionada = "Matemática"
+                        areaSelecionada = "Química"
                     }
                 )
                 RadioButtonArea(
-                    nome = "História",
-                    isSelected = areaSelecionada == "História",
+                    nome = "Biologia",
+                    isSelected = areaSelecionada == "Biologia",
                     onSelected = {
-                        areaSelecionada = "História"
+                        areaSelecionada = "Biologia"
                     }
                 )
                 RadioButtonArea(
-                    nome = "Geografia",
-                    isSelected = areaSelecionada == "Geografia",
+                    nome = "Inglês",
+                    isSelected = areaSelecionada == "Inglês",
                     onSelected = {
-                        areaSelecionada = "Geografia"
+                        areaSelecionada = "Inglês"
                     }
                 )
             }
@@ -320,7 +339,7 @@ fun FormCadastro(navController: NavController) {
             placeholder = "Digite seu e-mail",
             modifier = Modifier,
             keyboardType = KeyboardType.Email,
-            atualizarValor = { areas = it },
+            atualizarValor = { email = it },
             isMandatory = true
         )
         OutlinedTextFieldPassword(
@@ -351,7 +370,36 @@ fun FormCadastro(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { navController.navigate("home")},
+            onClick = {
+                var enderecoId = ""
+
+                for (end in enderecos) {
+                    if (end.cep == cep) {
+                        enderecoId = end.id
+                    }
+                }
+
+                usuario = Usuario(
+                    nome = nome,
+                    experiencias = experiencias,
+                    academicas = academicas,
+                    email = email,
+                    senha = senha,
+                    tipo = tipo,
+                    telefone = telefone,
+                    areas = areaSelecionada,
+                    endereco = enderecoId
+                )
+
+                cadastrarUsuario(
+                    usuario,
+                    onSuccess = { "Sucesso" },
+                    onFailure = {throwable -> "Falha no usuário" }
+                )
+
+                 navController.navigate("home")
+
+                      },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier
                 .width(270.dp)
