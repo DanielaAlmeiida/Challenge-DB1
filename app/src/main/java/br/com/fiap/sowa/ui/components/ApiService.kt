@@ -1,5 +1,6 @@
 package br.com.fiap.sowa.ui.components
 
+import br.com.fiap.sowa.model.Endereco
 import kotlinx.coroutines.CoroutineScope
 import br.com.fiap.sowa.model.Usuario
 import br.com.fiap.sowa.service.RetrofitFactoryUser
@@ -49,6 +50,23 @@ fun CoroutineScope.searchUsersEscola(onResult: (List<Usuario>?) -> Unit) {
 
         override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
             onResult(emptyList())
+        }
+    })
+}
+
+fun cadastrarEndereco(endereco: Endereco, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
+    val call = RetrofitFactoryUser().getUsuarioService().postEndereco(endereco)
+    call.enqueue(object : Callback<Endereco> {
+        override fun onResponse(call: Call<Endereco>, response: Response<Endereco>) {
+            if (response.isSuccessful) {
+                onSuccess()
+            } else {
+                onFailure(Exception("Erro ao cadastrar endereço: ${response.message()}"))
+            }
+        }
+
+        override fun onFailure(call: Call<Endereco>, t: Throwable) {
+            onFailure(t)
         }
     })
 }

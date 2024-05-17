@@ -80,4 +80,6 @@ dependencies {
 
     //Notificações
     implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+    implementation("androidx.compose.material3:material3:<version>")
+
 }

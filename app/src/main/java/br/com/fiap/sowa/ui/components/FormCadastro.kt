@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -50,6 +51,8 @@ fun FormCadastro(navController: NavController) {
     var mentorDestaque by remember { mutableStateOf(false) }
     var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
+    var experiencias by remember { mutableStateOf("") }
+    var academicas by remember { mutableStateOf("") }
     var cep by remember { mutableStateOf("") }
     var areas by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -119,6 +122,7 @@ fun FormCadastro(navController: NavController) {
                 }
             }
         }
+
         OutlinedTextFieldModel(
             value = nome,
             label = "Nome",
@@ -127,9 +131,88 @@ fun FormCadastro(navController: NavController) {
             keyboardType = KeyboardType.Text,
             atualizarValor = { nome = it },
         )
+        OutlinedTextFieldModel(
+            value = experiencias,
+            label = "Experiências",
+            placeholder = "Digite suas experiências",
+            modifier = Modifier,
+            keyboardType = KeyboardType.Text,
+            atualizarValor = { experiencias = it },
+        )
+        OutlinedTextFieldModel(
+            value = academicas,
+            label = "Acadêmicas",
+            placeholder = "Digite suas acadêmicas",
+            modifier = Modifier,
+            keyboardType = KeyboardType.Text,
+            atualizarValor = { academicas = it },
+        )
 
         // Uso do Dropdown
-        DropdownMenuModel()
+        //DropdownMenuModel()
+
+        // Uso do componente RadioButton
+        var areaSelecionada by remember { mutableStateOf<String?>(null) }
+
+        Text(
+            text = "Área de Interesse:",
+            fontWeight = FontWeight.Bold
+        )
+        Row {
+            Column{
+                // Uso do componente RadioButton
+                var areaSelecionada by remember { mutableStateOf<String?>(null) }
+
+                RadioButtonArea(
+                    nome = "Matemática",
+                    isSelected = areaSelecionada == "Matemática",
+                    onSelected = {
+                        areaSelecionada = "Matemática"
+                    }
+                )
+                RadioButtonArea(
+                    nome = "História",
+                    isSelected = areaSelecionada == "História",
+                    onSelected = {
+                        areaSelecionada = "História"
+                    }
+                )
+                RadioButtonArea(
+                    nome = "Geografia",
+                    isSelected = areaSelecionada == "Geografia",
+                    onSelected = {
+                        areaSelecionada = "Geografia"
+                    }
+                )
+            }
+            Column {
+                // Uso do componente RadioButton
+                var areaSelecionada by remember { mutableStateOf<String?>(null) }
+
+                RadioButtonArea(
+                    nome = "Matemática",
+                    isSelected = areaSelecionada == "Matemática",
+                    onSelected = {
+                        areaSelecionada = "Matemática"
+                    }
+                )
+                RadioButtonArea(
+                    nome = "História",
+                    isSelected = areaSelecionada == "História",
+                    onSelected = {
+                        areaSelecionada = "História"
+                    }
+                )
+                RadioButtonArea(
+                    nome = "Geografia",
+                    isSelected = areaSelecionada == "Geografia",
+                    onSelected = {
+                        areaSelecionada = "Geografia"
+                    }
+                )
+            }
+        }
+
 
         OutlinedTextField(
             value = cep,
@@ -167,6 +250,17 @@ fun FormCadastro(navController: NavController) {
             onClick = {
                 searchCep(cep) { enderecoResult ->
                     endereco = enderecoResult ?: Endereco("", "", "", "", "")
+                    val address = Endereco(
+                        endereco.logradouro,
+                        endereco.localidade,
+                        endereco.uf,
+                        endereco.bairro,
+                        endereco.cep
+                    )
+                    cadastrarEndereco(
+                        address,
+                        onSuccess = { "Sucesso" },
+                        onFailure = {throwable -> "Falha no endereço" })
                 }
             },
             enabled = cep.isNotBlank(),
