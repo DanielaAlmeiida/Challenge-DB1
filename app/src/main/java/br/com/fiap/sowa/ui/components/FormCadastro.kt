@@ -1,5 +1,6 @@
 package br.com.fiap.sowa.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -53,7 +54,8 @@ import retrofit2.Response
 fun FormCadastro(navController: NavController) {
     var aprendizDestaque by remember { mutableStateOf(true) }
     var mentorDestaque by remember { mutableStateOf(false) }
-    var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
+    var enderecoIdd by remember { mutableStateOf("") }
+    var endereco by remember { mutableStateOf(Endereco("", "", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
     var tipo by remember { mutableStateOf("") }
     var experiencias by remember { mutableStateOf("") }
@@ -257,6 +259,7 @@ fun FormCadastro(navController: NavController) {
                         "",
                         "",
                         "",
+                        "",
                         ""
                     )
                 }
@@ -268,14 +271,25 @@ fun FormCadastro(navController: NavController) {
         Button(
             onClick = {
                 searchCep(cep) { enderecoResult ->
-                    endereco = enderecoResult ?: Endereco("", "", "", "", "")
+                    /*
+                    if (enderecoResult != null) {
+                        enderecoIdd = "TESTANDO O ID ENDERECO PELA 348247238 VEZ"
+                    }
+                    */
+
+                    endereco = enderecoResult ?: Endereco(endereco.id, "", "", "", "", "")
                     val address = Endereco(
+                        endereco.id,
                         endereco.logradouro,
                         endereco.localidade,
                         endereco.uf,
                         endereco.bairro,
                         endereco.cep
                     )
+
+                    enderecoIdd = address.id.toString()
+                    Log.d("DEBUG", address.toString())
+
                     cadastrarEndereco(
                         address,
                         onSuccess = { "Sucesso" },
@@ -371,14 +385,19 @@ fun FormCadastro(navController: NavController) {
 
         Button(
             onClick = {
-                var enderecoId = ""
+                //var enderecoId = endereco.id
 
+                /*
                 for (end in enderecos) {
                     if (end.cep == cep) {
                         enderecoId = end.id
                     }
                 }
+*/
 
+                //Log.d("ENDERECO DO ID:", "ENDEREÇOOOOOOOOO ID --> $enderecoId")
+
+                /*
                 usuario = Usuario(
                     nome = nome,
                     experiencias = experiencias,
@@ -396,6 +415,41 @@ fun FormCadastro(navController: NavController) {
                     onSuccess = { "Sucesso" },
                     onFailure = {throwable -> "Falha no usuário" }
                 )
+*/
+
+                // Certifique-se de que todos os campos obrigatórios estão preenchidos
+                if (nome.isNotBlank() && email.isNotBlank() && senha.isNotBlank()) {
+                    usuario = Usuario(
+                        nome = nome,
+                        experiencias = experiencias,
+                        academicas = academicas,
+                        email = email,
+                        senha = senha,
+                        tipo = tipo,
+                        telefone = telefone,
+                        areas = areaSelecionada,
+                        endereco = enderecoIdd
+                    )
+
+                    // Chame a função de cadastro do usuário
+                    cadastrarUsuario(
+                        usuario,
+                        onSuccess = {
+                            // Se o cadastro for bem-sucedido, navegue para a tela inicial
+                            navController.navigate("home")
+                        },
+                        onFailure = { throwable ->
+                            // Trate a falha do cadastro aqui, por exemplo, exibindo uma mensagem de erro
+                            println("Falha no cadastro do usuário: ${throwable.message}")
+                        }
+                    )
+                } else {
+                    // Exibir mensagem de erro ou alerta informando que os campos obrigatórios não estão preenchidos
+                    println("Preencha todos os campos obrigatórios.")
+                }
+
+
+
 
                  navController.navigate("home")
 
@@ -428,6 +482,7 @@ private fun searchCep(cep: String, onResult: (Endereco?) -> Unit) {
         override fun onResponse(call: Call<Endereco>, response: Response<Endereco>) {
             if (response.isSuccessful) {
                 val endereco = response.body()
+                println(response.body())
                 onResult(endereco)
             } else {
                 onResult(null)

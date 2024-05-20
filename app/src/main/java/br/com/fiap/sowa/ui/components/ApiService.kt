@@ -1,5 +1,6 @@
 package br.com.fiap.sowa.ui.components
 
+import android.util.Log
 import br.com.fiap.sowa.model.Endereco
 import br.com.fiap.sowa.model.UserEndereco
 import kotlinx.coroutines.CoroutineScope
@@ -52,11 +53,24 @@ fun cadastrarEndereco(endereco: Endereco, onSuccess: () -> Unit, onFailure: (Thr
 fun cadastrarUsuario(usuario: Usuario, onSuccess: () -> Unit, onFailure: (Throwable) -> Unit) {
     val call = RetrofitFactoryUser().getUsuarioService().postUsuario(usuario)
     call.enqueue(object : Callback<Usuario> {
+        /*
         override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
             if (response.isSuccessful) {
                 onSuccess()
             } else {
                 onFailure(Exception("Erro ao cadastrar usuário: ${response.message()}"))
+            }
+        }
+         */
+
+        override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+            if (response.isSuccessful) {
+                Log.d("CadastroUsuario", "Usuário cadastrado com sucesso: ${response.body()}")
+                onSuccess()
+            } else {
+                Log.e("CadastroUsuario", "Erro ao cadastrar usuário: ${response.message()}")
+                onFailure(Exception("Erro ao cadastrar usuário: ${response.message()}" + "Erro ao cadastrar usuário: ${response}"
+                ))
             }
         }
 
