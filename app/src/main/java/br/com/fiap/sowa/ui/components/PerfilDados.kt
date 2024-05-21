@@ -23,7 +23,13 @@ import br.com.fiap.sowa.R
 
 
 @Composable
-fun PerfilDados(telefone: String, email: String, endereco: String, descricao: String) {
+fun PerfilDados(
+    telefone: String,
+    email: String,
+    academicas: String,
+    experiencias: String,
+    cidade: String
+) {
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
@@ -44,8 +50,7 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
                 color = Color.DarkGray
             )
             Spacer(modifier = Modifier.height(6.dp))
-            PerfilComponenteDado(text = "•", dado = endereco)
-            PerfilComponenteDado(text = "•", dado = endereco)
+            PerfilComponenteDado(text = "•", dado = academicas)
             Spacer(modifier = Modifier.height(16.dp))
         }
 
@@ -68,7 +73,7 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
                 )  {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                            text = descricao,
+                            text = experiencias,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Light,
                             color = Color.Black,
@@ -95,7 +100,7 @@ fun PerfilDados(telefone: String, email: String, endereco: String, descricao: St
             Spacer(modifier = Modifier.height(6.dp))
             PerfilComponenteDado(text = "Telefone: ", dado = telefone)
             PerfilComponenteDado(text = "Email: ", dado = email)
-            PerfilComponenteDado(text = "Endereço: ", dado = endereco)
+            PerfilComponenteDado(text = "Endereço: ", dado = cidade)
         }
 
     }

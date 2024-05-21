@@ -39,12 +39,12 @@ import br.com.fiap.sowa.R
 fun PreviewPerfilHeader() {
     val navController = rememberNavController()
     Box(modifier = Modifier.fillMaxSize()) {
-        PerfilHeader("E.E. Prof José Barreto", "Teatro, Dança", "4/5", "222")
+        PerfilHeader("E.E. Prof José Barreto", "Teatro, Dança", "São Paulo","4/5", "222")
     }
 }
 
 @Composable
-fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections: String) {
+fun PerfilHeader(nome: String, areas: String, cidade: String, avaliacao: String, numbConnections: String) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -112,7 +112,7 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Row {
-                    AreaInteresse(nomeAreaInteresse = "TEATRO", corAreaInteresse = Color.Red)
+                    AreaInteresse(nomeAreaInteresse = areas, corAreaInteresse = Color.Red)
                 }
                 Row(
                     modifier = Modifier.padding(top = 8.dp)
@@ -125,7 +125,7 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "São Paulo - SP",
+                        text = cidade,
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Light,
                         color = Color.White,

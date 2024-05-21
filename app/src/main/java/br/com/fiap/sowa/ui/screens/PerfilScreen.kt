@@ -60,7 +60,12 @@ fun PerfilScreen( navController: NavController ) {
         modifier = Modifier.fillMaxSize()
     ) {
         Header()
-        PerfilHeader(usuario.nome?:"José Barreto", usuario.areas?:"Teatro, Dança", "4/5", "222")
+        PerfilHeader(
+            usuario.nome?:"José Barreto",
+            usuario.areas?:"Teatro, Dança",
+            usuario.endereco?.cidade?:"São Paulo",
+            "4/5",
+            "222")
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
@@ -68,8 +73,10 @@ fun PerfilScreen( navController: NavController ) {
                 PerfilDados(
                     usuario.telefone?: "(11) 91234-5678",
                     usuario.email?: "email@gmail.com",
-                    usuario.endereco?.cidade ?: "Av. Lins Vasconcelos, 5000 - São Paulo, SP",
-                    descricao = usuario.experiencias?: descricao)
+                    usuario.academicas?: "Experiencia em Teatro e Dança",
+                    usuario.experiencias?: descricao,
+                    usuario.endereco?.cidade?: "São Paulo"
+                    )
             }
         }
         NavBar(navController, "perfil")
