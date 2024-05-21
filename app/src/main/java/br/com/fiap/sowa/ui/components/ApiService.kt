@@ -5,6 +5,7 @@ import br.com.fiap.sowa.model.Endereco
 import br.com.fiap.sowa.model.UserEndereco
 import kotlinx.coroutines.CoroutineScope
 import br.com.fiap.sowa.model.Usuario
+import br.com.fiap.sowa.model.UsuarioHome
 import br.com.fiap.sowa.model.UsuarioId
 import br.com.fiap.sowa.service.RetrofitFactoryUser
 import retrofit2.Call
@@ -19,16 +20,47 @@ fun searchUsers(onResult: (List<Usuario>?) -> Unit) {
             if (response.isSuccessful) {
                 val usuarios = response.body()
                 if (usuarios != null) {
+                    Log.d("API Response", "Usuários recebidos: $usuarios")
                     onResult(usuarios)
                 } else {
+                    Log.d("API Response", "Resposta bem-sucedida, mas lista de usuários é nula")
                     onResult(emptyList())
                 }
             } else {
+                Log.d("API Response", "Resposta não foi bem-sucedida: ${response.code()}")
                 onResult(emptyList())
             }
         }
 
         override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
+            Log.e("API Error", "Erro na chamada da API", t)
+            onResult(emptyList())
+        }
+    })
+}
+
+fun searchUsersHome(onResult: (List<UsuarioHome>?) -> Unit) {
+    val call = RetrofitFactoryUser().getUsuarioService().getUsuariosHome()
+    call.enqueue(object : Callback<List<UsuarioHome>> {
+
+        override fun onResponse(call: Call<List<UsuarioHome>>, response: Response<List<UsuarioHome>>) {
+            if (response.isSuccessful) {
+                val usuarios = response.body()
+                if (usuarios != null) {
+                    Log.d("API Response", "Usuários recebidos: $usuarios")
+                    onResult(usuarios)
+                } else {
+                    Log.d("API Response", "Resposta bem-sucedida, mas lista de usuários é nula")
+                    onResult(emptyList())
+                }
+            } else {
+                Log.d("API Response", "Resposta não foi bem-sucedida: ${response.code()}")
+                onResult(emptyList())
+            }
+        }
+
+        override fun onFailure(call: Call<List<UsuarioHome>>, t: Throwable) {
+            Log.e("API Error", "Erro na chamada da API", t)
             onResult(emptyList())
         }
     })

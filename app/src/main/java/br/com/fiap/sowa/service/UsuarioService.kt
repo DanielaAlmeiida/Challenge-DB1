@@ -3,6 +3,7 @@ package br.com.fiap.sowa.service
 import br.com.fiap.sowa.model.Endereco
 import br.com.fiap.sowa.model.UserEndereco
 import br.com.fiap.sowa.model.Usuario
+import br.com.fiap.sowa.model.UsuarioHome
 import br.com.fiap.sowa.model.UsuarioId
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,6 +15,9 @@ interface UsuarioService {
 
     @GET("usuarios/")
     fun getUsuarios(): Call<List<Usuario>>
+
+    @GET("usuarios/")
+    fun getUsuariosHome(): Call<List<UsuarioHome>>
 
     @GET("usuarios/")
     fun getUsuariosId(): Call<List<UsuarioId>>
