@@ -25,6 +25,9 @@ fun SetupNavigation() {
         composable(route = "home") {
             HomeScreen(navController)
         }
+        composable(route = "buscaAvancada") {
+            BuscaAvancadaScreen(navController)
+        }
         composable(route = "connections") {
             ConnectionsScreen(navController)
         }

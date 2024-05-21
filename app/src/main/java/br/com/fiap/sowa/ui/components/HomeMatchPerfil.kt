@@ -49,14 +49,11 @@ fun HomeMatchPerfil(
     nome: String,
     experiencias: String,
     academicas: String,
-    email: String,
-    senha: String,
     tipo: String,
     telefone: String,
     areas: String,
     endereco: Any,
     avaliacao: String,
-    numbConnections: String,
     onNextClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -141,9 +138,6 @@ fun HomeMatchPerfil(
             Spacer(modifier = Modifier.height(8.dp))
             Row {
                 AreaInteresse(nomeAreaInteresse = areas, corAreaInteresse = Color.Red)
-                AreaInteresse(nomeAreaInteresse = areas, corAreaInteresse = Color.Blue)
-                AreaInteresse(nomeAreaInteresse = areas, corAreaInteresse = Color.Gray)
-                AreaInteresse(nomeAreaInteresse = areas, corAreaInteresse = Color.Cyan)
             }
             Spacer(modifier = Modifier.height(8.dp))
             /*
@@ -173,7 +167,6 @@ fun HomeMatchPerfil(
                 fontWeight = FontWeight.Bold,
                 color = Color.Black
             )
-            PerfilComponenteDado(text = "-", dado = academicas)
             PerfilComponenteDado(text = "-", dado = academicas)
 
             Spacer(modifier = Modifier.height(2.dp))
