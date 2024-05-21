@@ -113,9 +113,6 @@ fun PerfilHeader(nome: String, areas: String, avaliacao: String, numbConnections
 
                 Row {
                     AreaInteresse(nomeAreaInteresse = "TEATRO", corAreaInteresse = Color.Red)
-                    AreaInteresse(nomeAreaInteresse = "DANCA", corAreaInteresse = Color.Blue)
-                    AreaInteresse(nomeAreaInteresse = "ROBOTICA", corAreaInteresse = Color.Gray)
-                    AreaInteresse(nomeAreaInteresse = "CIENCIA", corAreaInteresse = Color.Cyan)
                 }
                 Row(
                     modifier = Modifier.padding(top = 8.dp)

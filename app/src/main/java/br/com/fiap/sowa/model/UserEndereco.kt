@@ -1,10 +1,10 @@
 package br.com.fiap.sowa.model
 
 data class UserEndereco(
-    val id: String,
-    val logradouro: String?,
-    val bairro: String?,
-    val cidade: String?,
-    val uf: String?,
-    val cep: String?
+    var _id: String,
+    var logradouro: String?,
+    var bairro: String?,
+    var cidade: String?,
+    var uf: String?,
+    var cep: String?
 )

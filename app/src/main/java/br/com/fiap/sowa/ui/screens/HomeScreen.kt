@@ -56,7 +56,7 @@ fun HomeScreen(navController: NavController) {
                     tipo = usuarios.getOrNull(currentIndex)?.tipo ?: "",
                     telefone = usuarios.getOrNull(currentIndex)?.telefone ?: "",
                     areas = usuarios.getOrNull(currentIndex)?.areas ?: "",
-                    endereco = usuarios.getOrNull(currentIndex)?.endereco ?: Endereco("", "", "", "", "", ""),
+                    endereco = usuarios.getOrNull(currentIndex)?.endereco ?: Endereco("", "", "", "", ""),
                     avaliacao = "PEGAR DADO AVALIAÇÃO",
                     numbConnections = "222"
                 ) {

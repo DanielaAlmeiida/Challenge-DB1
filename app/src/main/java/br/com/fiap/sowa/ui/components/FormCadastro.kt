@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -54,8 +55,7 @@ import retrofit2.Response
 fun FormCadastro(navController: NavController) {
     var aprendizDestaque by remember { mutableStateOf(true) }
     var mentorDestaque by remember { mutableStateOf(false) }
-    var enderecoIdd by remember { mutableStateOf("") }
-    var endereco by remember { mutableStateOf(Endereco("", "", "", "", "", "")) }
+    var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
     var tipo by remember { mutableStateOf("") }
     var experiencias by remember { mutableStateOf("") }
@@ -71,14 +71,7 @@ fun FormCadastro(navController: NavController) {
     var usuario by remember { mutableStateOf(
         Usuario("", "", "", "", "", "", "", "", "")) }
     var enderecos by remember { mutableStateOf(emptyList<UserEndereco>()) }
-
-    LaunchedEffect(Unit) {
-        searchEnderecos { enderecoObtido ->
-            enderecoObtido?.let {
-                enderecos = it
-            }
-        }
-    }
+    var enderecosId by remember { mutableStateOf(mutableListOf<String>()) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -260,7 +253,6 @@ fun FormCadastro(navController: NavController) {
                         "",
                         "",
                         "",
-                        ""
                     )
                 }
             }),
@@ -271,15 +263,9 @@ fun FormCadastro(navController: NavController) {
         Button(
             onClick = {
                 searchCep(cep) { enderecoResult ->
-                    /*
-                    if (enderecoResult != null) {
-                        enderecoIdd = "TESTANDO O ID ENDERECO PELA 348247238 VEZ"
-                    }
-                    */
 
-                    endereco = enderecoResult ?: Endereco(endereco.id, "", "", "", "", "")
+                    endereco = enderecoResult ?: Endereco( "", "", "", "", "")
                     val address = Endereco(
-                        endereco.id,
                         endereco.logradouro,
                         endereco.localidade,
                         endereco.uf,
@@ -287,14 +273,14 @@ fun FormCadastro(navController: NavController) {
                         endereco.cep
                     )
 
-                    enderecoIdd = address.id.toString()
-                    Log.d("DEBUG", address.toString())
-
                     cadastrarEndereco(
                         address,
                         onSuccess = { "Sucesso" },
                         onFailure = {throwable -> "Falha no endereço" })
+
                 }
+
+
             },
             enabled = cep.isNotBlank(),
             modifier = Modifier
@@ -385,75 +371,51 @@ fun FormCadastro(navController: NavController) {
 
         Button(
             onClick = {
-                //var enderecoId = endereco.id
+                // Chama a função searchEnderecos e processa o resultado no callback
+                searchEnderecos { enderecoObtido ->
+                    enderecoObtido?.let {
+                        enderecos = it
+                        Log.d("EnderecoID searchEnderecos", "ID do endereço searchEnderecos: ${enderecoObtido}")
 
-                /*
-                for (end in enderecos) {
-                    if (end.cep == cep) {
-                        enderecoId = end.id
+                        for (end in enderecos) {
+                            enderecosId.add(end._id)
+                            Log.d("EnderecoID do for", "ID do endereço: ${end._id}")
+                        }
+
+                        // Obtém o último ID da lista de endereços
+                        val ultimoEnderecoId = enderecosId.last()
+                        Log.d("EnderecoID ultimoEnderecoID", "ID do endereço ultimoEnderecoId: ${ultimoEnderecoId}")
+
+                        // Cria o objeto usuário
+                        usuario = Usuario(
+                            nome = nome,
+                            experiencias = experiencias,
+                            academicas = academicas,
+                            email = email,
+                            senha = senha,
+                            tipo = tipo,
+                            telefone = telefone,
+                            areas = areaSelecionada,
+                            endereco = ultimoEnderecoId
+                        )
+
+                        // Chama a função para cadastrar o usuário
+                        cadastrarUsuario(
+                            usuario,
+                            onSuccess = {
+                                navController.navigate("home")
+                            },
+                            onFailure = { throwable ->
+                                // Trate a falha do cadastro aqui, por exemplo, exibindo uma mensagem de erro
+                                println("Falha no cadastro do usuário: ${throwable.message}")
+                            }
+                        )
+
+                        // Navega para a tela "home" após o cadastro
+                        navController.navigate("home")
                     }
                 }
-*/
-
-                //Log.d("ENDERECO DO ID:", "ENDEREÇOOOOOOOOO ID --> $enderecoId")
-
-                /*
-                usuario = Usuario(
-                    nome = nome,
-                    experiencias = experiencias,
-                    academicas = academicas,
-                    email = email,
-                    senha = senha,
-                    tipo = tipo,
-                    telefone = telefone,
-                    areas = areaSelecionada,
-                    endereco = enderecoId
-                )
-
-                cadastrarUsuario(
-                    usuario,
-                    onSuccess = { "Sucesso" },
-                    onFailure = {throwable -> "Falha no usuário" }
-                )
-*/
-
-                // Certifique-se de que todos os campos obrigatórios estão preenchidos
-                if (nome.isNotBlank() && email.isNotBlank() && senha.isNotBlank()) {
-                    usuario = Usuario(
-                        nome = nome,
-                        experiencias = experiencias,
-                        academicas = academicas,
-                        email = email,
-                        senha = senha,
-                        tipo = tipo,
-                        telefone = telefone,
-                        areas = areaSelecionada,
-                        endereco = enderecoIdd
-                    )
-
-                    // Chame a função de cadastro do usuário
-                    cadastrarUsuario(
-                        usuario,
-                        onSuccess = {
-                            // Se o cadastro for bem-sucedido, navegue para a tela inicial
-                            navController.navigate("home")
-                        },
-                        onFailure = { throwable ->
-                            // Trate a falha do cadastro aqui, por exemplo, exibindo uma mensagem de erro
-                            println("Falha no cadastro do usuário: ${throwable.message}")
-                        }
-                    )
-                } else {
-                    // Exibir mensagem de erro ou alerta informando que os campos obrigatórios não estão preenchidos
-                    println("Preencha todos os campos obrigatórios.")
-                }
-
-
-
-
-                 navController.navigate("home")
-
-                      },
+            },
             colors = ButtonDefaults.buttonColors(Color.Transparent),
             modifier = Modifier
                 .width(270.dp)
