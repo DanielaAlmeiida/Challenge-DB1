@@ -26,7 +26,7 @@ fun ConnectionsScreen(navController: NavController) {
 
     ) {
         Header()
-        SearchBar()
+        SearchBar(filtroSelecionado = "")
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {

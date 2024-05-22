@@ -166,3 +166,21 @@ fun searchUsersId(onResult: (List<UsuarioId>?) -> Unit) {
         }
     })
 }
+
+fun searchUsersByPrompt(prompt: String, onResult: (List<UsuarioHome>?) -> Unit) {
+    val call = RetrofitFactoryUser().getUsuarioService().getUsuarioBusca(prompt)
+    call.enqueue(object : Callback<List<UsuarioHome>> {
+        override fun onResponse(call: Call<List<UsuarioHome>>, response: Response<List<UsuarioHome>>) {
+            if (response.isSuccessful) {
+                val usuarios = response.body()
+                onResult(usuarios)
+            } else {
+                onResult(emptyList())
+            }
+        }
+
+        override fun onFailure(call: Call<List<UsuarioHome>>, t: Throwable) {
+            onResult(emptyList())
+        }
+    })
+}

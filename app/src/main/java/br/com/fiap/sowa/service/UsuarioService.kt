@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface UsuarioService {
 
@@ -24,6 +25,15 @@ interface UsuarioService {
 
     @GET("usuario/{id}")
     fun getUsuarioId(@Path("id") id: String): Call<UsuarioId>
+
+    @GET("usuarios/busca")
+    fun getUsuarioBusca(@Query("areas") prompt: String): Call<List<UsuarioHome>>
+
+//    @GET("usuarios/busca")
+//    fun getUsuarioBuscaAreas(@Query("areas") prompt: String): Call<List<UsuarioHome>>
+
+//    @GET("usuarios/{prompt}")
+//    fun getUsuarioBusca(@Path("prompt") prompt: String): Call<List<UsuarioHome>>
 
     @GET("enderecos/")
     fun getEnderecos(): Call<List<UserEndereco>>

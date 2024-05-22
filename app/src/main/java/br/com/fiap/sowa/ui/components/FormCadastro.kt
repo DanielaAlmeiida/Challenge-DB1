@@ -57,7 +57,7 @@ fun FormCadastro(navController: NavController) {
     var mentorDestaque by remember { mutableStateOf(false) }
     var endereco by remember { mutableStateOf(Endereco("", "", "", "", "")) }
     var nome by remember { mutableStateOf("") }
-    var tipo by remember { mutableStateOf("") }
+    var tipo by remember { mutableStateOf("Aprendiz") }
     var experiencias by remember { mutableStateOf("") }
     var academicas by remember { mutableStateOf("") }
     var telefone by remember { mutableStateOf("") }
@@ -97,7 +97,7 @@ fun FormCadastro(navController: NavController) {
                     onClick = {
                         aprendizDestaque = true
                         mentorDestaque = false
-                        tipo = "aprendiz"
+                        tipo = "Aprendiz"
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = if (aprendizDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
@@ -118,7 +118,7 @@ fun FormCadastro(navController: NavController) {
                     onClick = {
                         aprendizDestaque = false
                         mentorDestaque = true
-                        tipo = "mentor"
+                        tipo = "Mentor"
                     },
                     colors = if (mentorDestaque) ButtonDefaults.buttonColors(colorResource(id = R.color.greenPrincipal)) else
                         ButtonDefaults.buttonColors(colorResource(id = R.color.white)),

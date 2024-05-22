@@ -7,6 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -32,7 +34,7 @@ import br.com.fiap.sowa.model.UsuarioHome
 
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun SearchBar(filtroSelecionado: String?) {
+fun SearchBarAdvanced(filtroSelecionado: String?) {
     var searchText by remember { mutableStateOf("") }
     var usuarios by remember { mutableStateOf(emptyList<UsuarioHome>()) }
     var prompt by remember { mutableStateOf("") }
@@ -70,9 +72,7 @@ fun SearchBar(filtroSelecionado: String?) {
 
         OutlinedButton(
             onClick = {
-                //prompt = "${filtroSelecionado}=${searchText}"
                 prompt = searchText
-                //prompt = "busca?nome=bb"
                 Log.d("Usuários filtro prompt", "Usuários filtro carregados prompt: $prompt")
 
                 searchUsersByPrompt(prompt) { usuariosPrompt ->
@@ -95,6 +95,8 @@ fun SearchBar(filtroSelecionado: String?) {
                 )
             }
         )
+
+
 
     }
 }
